@@ -1,0 +1,22 @@
+!!! xml
+%feed{:xmlns => 'http://www.w3.org/2005/Atom'}
+ 
+  %title IAmNeato.com is host to the e-spawn of Emilio Cavazos
+  %link{:href => 'http://www.iamneato.com', :rel => 'self', :hreflang => 'en', :type => 'application/atom+xml'}
+   
+  %author
+    %name Emilio Cavazos
+    %uri http://www.iamneato.com/
+
+  %updated= @articles.first.published.xmlschema
+  %id= "tag:iamneato.com,#{@articles.first.published.strftime('%Y-%m-%d')}:#{article_path(@articles.first)}"
+  
+  - for article in @articles
+    %entry
+      %id= "tag:iamneato.com,#{article.published.strftime('%Y-%m-%d')}:#{article_path(article)}"
+      %title= article.title
+      %published= article.published.xmlschema
+      %updated= article.last_modified.xmlschema
+      %link{:href => "http://www.iamneato.com#{article_path(article)}", :rel => 'alternate', :hreflang => 'en', :type => 'text/html'}
+      %content{:type => 'xhtml', 'xml:lang' => 'en', 'xml:base'=>'www.iamneato.com/'}
+        %div{:xmlns => 'http://www.w3.org/1999/xhtml'}= absoluteify_links(article_body(article))

@@ -1,0 +1,35 @@
+!!! Strict
+%html{:xmlns =>'http://www.w3.org/1999/xhtml', 'xml:lang' => 'en', :lang => 'en'}
+
+	%head
+		%meta{'http-equiv' => 'Content-Type', :content => 'text/html; charset=utf-8'}
+		%title= "#{"#{@title} // " if !@title.nil? } iamneato.com"
+		%link{:href => '/reset.css', :media => 'screen', :rel => 'stylesheet', :type => 'text/css'}
+		%link{:href => '/styles.css', :media => 'screen', :rel => 'stylesheet', :type => 'text/css'}
+		%link{:href => '/styles/jquery.fancybox.css', :media => 'screen', :rel => 'stylesheet', :type => 'text/css'}
+		%link{:rel => 'shortcut icon', :href => '/favicon.ico'}
+		%link{:rel => 'alternate', :href => '/articles.atom', :title => 'IAmNeato.com is host to the e-spawn of Emilio Cavazos', :type => 'application/atom+xml'}
+		%script{:src => '/javascripts/code_highlighter.js', :type => "text/javascript"}
+
+	%body
+		#menu-wrapper= haml :_menu, :layout => false
+		#header
+			#header-wrapper
+				#header-img
+					I am neato, you are neato, we are neato, ummmm ...
+				#subscribe
+					%a{ :href => '/articles.atom' }
+						%img{ :src => '/images/feed-icon.png', :alt => 'Subscribe', :title => 'Subscribe' }
+		#main
+			= yield
+			#footer
+				This site is host to the e-spawn of Emilio Cavazos
+				%ul
+					%li
+						%a{ :href => 'http://www.twitter.com/emiliocavazos' } twitter
+					%li
+						\|
+					%li
+						%a{ :href => 'http://github.com/ecavazos' } github
+			#copyright
+				Copyright © 2006 to Forever, by Emilio Cavazos

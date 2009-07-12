@@ -1,0 +1,179 @@
+body
+  background-color: #fff
+  color: #3d3d3d
+  font-family: 'lucida grande','arial','trebuchet ms','sans-serif'
+  font-size: 101%
+  font-style: normal
+  font-weight: normal
+  text-align: left
+  height: 100%
+  padding: 0
+  margin: 0 0 40px 0
+
+h2
+  background-color: #222
+  border-bottom: solid 1px #222
+  color: #fff
+  float: right
+  font-size: 0.9em
+  margin: 0 0 20px 0
+  padding: 5px 20px
+  text-transform: lowercase
+
+h3
+  clear: both
+  font-size: 1em
+  margin: 0 0 5px 0 
+
+p
+  clear: both
+  font-size: 0.85em
+  margin: 0 0 15px 0
+  line-height: 1.4em
+
+  a
+    text-decoration: none
+
+a:link, a:visited, a:active 
+  color: #1850B1
+
+a:hover 
+  color: #1850B1
+  text-decoration: underline
+
+pre, code
+  font-family: 'Monaco', 'Courier New', 'Terminal', monospace
+  font-size: 12px
+  color: #e6e0db
+  overflow: auto
+
+pre
+  background-color: #232323
+  border: 1px solid black
+  padding: 10px
+  margin: 20px 0 30px
+  overflow: auto
+
+#menu-wrapper
+  background-color: #262626
+  overflow: hidden
+
+#menu
+  margin: 0 auto
+  overflow: hidden
+  width: 585px
+
+  ul
+    float: right
+
+    li
+      border-left: solid 1px #383838
+      border-right: solid 1px #383838
+      float: left
+      font-size: 0.75em
+      letter-spacing: 0.05em
+      padding: 5px 10px
+      margin-left: -1px
+
+      a
+        color: #fff
+        text-decoration: none
+
+#header 
+  background: url('/images/bg_tile.png') repeat-x
+  margin: 0 0 30px 0
+  padding: 0
+  width: 100%
+  float: left
+
+#header-wrapper
+  margin: 0 auto
+  overflow: hidden
+  width: 585px
+
+#header-img 
+  background: url('/images/header4.png') no-repeat
+  float: left
+  margin: 0 auto
+  text-indent: -5000px
+  height: 246px
+  width: 350px
+
+#subscribe
+  float: right
+  margin: 20px 0 0 0
+  height: 32px
+  width: 32px
+
+#main 
+  clear: both
+  margin: 0 auto
+  padding: 0
+  overflow: hidden
+  width: 585px
+
+@import article.sass
+
+@import footer.sass
+
+@import archive.sass
+
+#doodles 
+  margin: 40px 0 0 0
+  overflow: hidden
+
+  div
+    float: left
+    margin: 0 20px 20px 0
+
+  .row-end
+    clear: both
+    margin: 0 0 20px 0
+
+#about
+
+  div 
+    margin: 0
+    padding: 0 0 30px 0
+	
+  strong 
+    font-weight: bold
+	
+  ul 
+    list-style-type: disc
+    list-style-position: inside
+    margin: 10px 0 0 20px
+	
+  li
+    font-size: 0.85em 
+    margin-bottom: 10px
+
+/ RUBY / JAVASCRIPT
+code span
+  &.comment
+    :color #BC9458
+    :font-style italic
+
+  &.string
+    :color #A5C261
+
+  &.brackets
+
+  &.symbol
+    :color #6D9CBE
+
+  &.keywords
+    :color #CC7833
+
+code.html span
+  &.tag
+    :color #FFC66D
+
+  &.attribute
+    :color #FFC66D
+
+  &.string
+    :color #A5C261
+
+  &.doctype
+  :color #FFC66D 
