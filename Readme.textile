@@ -1,14 +1,12 @@
-h1. hughevans.net
+h1. iamneato.com
 
-_A Tiny Sinatra Blog_
-
-My take on a tiny Sinatra blog, with inspiration (and a fair chunk of code) coming from "toolmantim":http://github.com/toolmantim/toolmantim/tree/master.
+The code for this Sinatra blog originated from Hugh Evans "hughevans.net":http://github.com/artpop/hughevans.net/tree/master but has been modified to fit my needs.
 
 h2. License
 
-MIT license except for the files found in:
+The files found in the following directories are Copyright Emilio Cavazos:
 
 * @/articles/@
 * @/public/images/@
 
-They are copyright Hugh Evans.
+The rest of the files are MIT Licensed. 
