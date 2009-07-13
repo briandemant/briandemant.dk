@@ -16,9 +16,12 @@ helpers do
   end
   
   def absoluteify_links(html)
+    host = 'http://www.iamneato.com'
+    path = "\\1#{host}\\2\\3"
+    
     html.
-      gsub(/href=(["'])(\/.*?)(["'])/, 'href=\1http://hughevans.net\2\3').
-      gsub(/src=(["'])(\/.*?)(["'])/, 'src=\1http://hughevans.net\2\3')
+      gsub(/href=(["'])(\/.*?)(["'])/, "href=#{path}").
+      gsub(/src=(["'])(\/.*?)(["'])/, "src=#{path}")
   end
 end
 
