@@ -1,6 +1,8 @@
 h1. iamneato.com
 
-The code for this Sinatra blog originated from Hugh Evans "hughevans.net":http://github.com/artpop/hughevans.net/tree/master but has been modified to fit my needs.
+This is a simple but deceivingly powerful Sinatra blog.  It's a great way to learn Sinatra and gives full control of your website code.
+
+The code for this Sinatra blog originated from Hugh Evans but has been modified to fit my needs. You can find the original repo here "hughevans.net":http://github.com/artpop/hughevans.net/tree/master.
 
 h2. License
 
