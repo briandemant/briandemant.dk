@@ -6,7 +6,7 @@
     %ul
       %li
         .published
-          = @article.published.strftime("%Y %B %d")
+          = @article.published.strftime("%Y %b %d")
         %h3.title
           %a{:href => article_path(@article)}
             = @article.title
