@@ -1,6 +1,5 @@
 %h2 Archive
-%p
-  I know it's not much of an archive. I only have #{@articles.length} articles in my archive.  Sorry, I'm a lazy blogger.
+%p= "I know it's not much of an archive. I only have #{@articles.length} articles in my archive.  Sorry, I'm a lazy blogger."
 #archive
   - for @article in @articles
     %ul
