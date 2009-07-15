@@ -5,7 +5,9 @@
     %ul
       %li
         .published
-          = @article.published.strftime("%Y %b %d")
+          .year= @article.published.strftime("%Y")
+          .month= @article.published.strftime("%b")
+          .day= @article.published.strftime("%d")
         %h3.title
           %a{:href => article_path(@article)}
             = @article.title
