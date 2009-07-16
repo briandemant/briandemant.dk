@@ -1,5 +1,6 @@
 # Code originally from toolmantim:
 # http://github.com/toolmantim/toolmantim/blob/972372615c534916a3a1c8ae0f01e72626ca83e0/lib/article.rb
+
 class Article
   def self.path=(path)
     @path = path
