@@ -63,6 +63,10 @@ get '/:style.css' do
   sass :"stylesheets/#{params[:style]}"
 end
 
+not_found do
+  haml :'404', :layout => false
+end
+
 module Haml::Filters::Preserve
   def render(text)
     Haml::Helpers.preserve(Haml::Helpers.html_escape(text))
