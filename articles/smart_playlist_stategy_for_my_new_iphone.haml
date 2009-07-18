@@ -1,0 +1,41 @@
+-# title: Smart Playlist Stategy for My New iPhone
+-# published: 2008-1-24
+
+:textile
+  How did I solve my new but welcome challenge of going from a 30GB iPod to an 8GB iPhone? The answer, smart playlists, of course. Below is  a break down of my playlist _strategery:_
+  
+%ol
+  %li
+    %strong
+      Best Alt
+    \- This playlist grabs only songs whose genre contains 'alt' and has a rating greater than three stars.  The playlist is limited to 100 songs by "least recently played"
+  %li
+    %strong
+      Best Indie
+    \- This playlist is the same as number 1 but for 'indie'.
+  %li
+    %strong
+      Best Punk
+    \- Again, I just changed the genre text.
+  %li
+    %strong
+      Best Rock
+    \- My genre condition for this playlist is changed to "genre is rock". This change is to avoid grabbing songs of the
+    %em
+      Classic Rock
+    genre.
+  %li
+    %strong
+      Alt/Indie/Rock/Punk
+    \- I then merge playlists 1-4 into this playlist so that I can use the
+    %em
+      match all
+    condition in playlist number 6.
+  %li
+    %strong
+      Best Indie/Alt Mix
+    \- This is the playlist I actually listen to. I use the condition "playlist is Alt/Indie/Rock/Punk" and a pair of conditions to play songs that haven't been skipped or listened to in the last 7 days. 
+
+
+:textile
+  You can limit this playlist however you like. I enabled automatic syncing for my iPhone. Under the music tab I put a check next to the playlists I want to sync. Note, if you have a playlist built from another playlist, both playlists need to be included. If auto syncing freaks you out, I have a trick for the control-freak in all of us. I have one static playlist (checked) that I use like a manually managed iPod. You can change the genres to match your music listening taste and make this strategy your own.
