@@ -64,6 +64,7 @@ get '/:style.css' do
 end
 
 not_found do
+  @title = '404 - Page Not Found'
   haml :'404', :layout => false
 end
 
