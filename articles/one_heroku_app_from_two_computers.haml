@@ -1,0 +1,30 @@
+-# title: One Heroku App From Two Computers
+-# published: 2009-7-18
+
+:textile
+  First, let me start by giving you some context.  I own two macs and they each have distinct responsibilities.  I do most of my development on my macbook and I use my iMac for graphics.  Earlier this morning, I was working on a custom "404 page":/404 for this site.  This required some Illustrator work and of course my iMac.  When the design work was finished I realized that the git "repository":http://github.com/ecavazos/iamneato.com/tree/master for this site was on my macbook.  I wanted to avoid switching computers.  I thought, no problem, I'll just clone my repository from "github":http://github.com and I'll be ready to rock.  Until I reached the deploy step, it really was as simple as that.
+  
+%h3 Time to Deploy
+
+:textile
+  Deploying a "Heroku":http://heroku.com app is dirt simple.  Heroku host a great "doc":http://docs.heroku.com/rack that demos how simple it is and I can't say enough about Heroku's awesomeness.  While working this morning, I hit the documentation looking for information on how to setup my second computer.  I couldn't find anything on the topic.  At least not in my particular context.  My inability to resolve this issue rapidly was a result of my inexperience with git and not a problem with the Heroku documentation.  In hindsight, I could've resolved this issue using the Heroku documentation exclusively.
+  
+  All of the Heroku examples show you how to start an application from scratch using *heroku create*. Since I was working with an existing application, I couldn't use create.  At the time I was thinking I needed to tell heroku "locally" the app name for the repository I was working with.  Instead, I had to tell git how to push to heroku. 
+
+%h3 The Solution
+
+:textile
+  At this point, you should already have the Heroku gem installed.  If so, you can be up and running with these four simple commands.
+  
+%pre
+  %code<
+    :preserve
+      $ git clone git://github.com/youraccunt/appname.git
+      $ heroku config
+      $ git remote add heroku git@heroku.com:appname.git
+      $ git push heroku master
+      
+%h3 Conclusion
+
+:textile
+  The magic is really line number three.  This is something you need to do on a per repository basis.  While working in the context of your repository, you can type the command *git remote* to see a list of already configured hosts.  
