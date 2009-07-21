@@ -16,6 +16,10 @@ describe "ArticleGetter" do
     @getter.all[0].instance_of?(Article).should be_true
   end
   
+  it "should return a file by name (aka ID)" do
+    @getter.find_by_id('view-first').title.should == 'View First'
+  end
+  
   it "should return a file by name (aka ID) when accessing via an indexer" do
     @getter['view-first'].title.should == 'View First'
   end

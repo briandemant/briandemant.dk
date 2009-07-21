@@ -1,4 +1,4 @@
-
+require 'lib/article.rb'
 
 class ArticleGetter
   
@@ -15,12 +15,16 @@ class ArticleGetter
   end
 
   def all
-    files.map {|f| Article.new(f, File.read(f))}
+    files.map {|f| Article.new(f)}
   end
-
+  
+  def find_by_id(id)
+    self[id]
+  end
+  
   def [](id)
     path = article_path(id.gsub('-', '_'))
-    File.exist?(path) && Article.new(path, File.read(path))
+    File.exist?(path) && Article.new(path)
   end
 
   def template_variable(text, name)

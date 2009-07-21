@@ -2,9 +2,11 @@ require 'rubygems'
 require 'sinatra'
 require 'haml'
 require 'time'
-require 'lib/article'
+require 'lib/article_getter'
 
-Article.path = File.join(Sinatra::Application.root, 'articles')
+before do
+  @getter = ArticleGetter.new(File.join(Sinatra::Application.root, 'articles'))
+end
 
 helpers do
   def article_body(article)
@@ -26,12 +28,12 @@ helpers do
 end
 
 get '/' do
-  @articles = Article.all.sort[0..10]
+  @articles = @getter.all.sort[0..10]
   haml :home
 end
 
 get '/:year/:month/:day/:id' do
-  @article = Article[params[:id]] || raise(Sinatra::NotFound)
+  @article = @getter.find_by_id(params[:id]) || raise(Sinatra::NotFound)
   @title = @article.title
   haml :article
 end
@@ -42,7 +44,7 @@ get '/doodles' do
 end
 
 get '/archive' do
-  @articles = Article.all.sort
+  @articles = @getter.all.sort
   @title = 'Archive'
   haml :archive
 end
@@ -53,7 +55,7 @@ get '/about' do
 end
 
 get '/articles.atom' do
-  @articles = Article.all.sort
+  @articles = @getter.all.sort
   content_type 'application/atom+xml'
   haml :feed, :layout => false
 end
