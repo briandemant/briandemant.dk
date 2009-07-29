@@ -10,7 +10,7 @@ describe "Article" do
     @article.path.should == 'articles/view_first.haml'
   end
   
-  it "should retrun file name" do
+  it "should return file name" do
     @article.slug.should == 'view_first'
   end
   

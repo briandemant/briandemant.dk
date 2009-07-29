@@ -1,0 +1,63 @@
+-# title: How to Copy Folders Recursively With Ruby
+-# published: 2009-7-28
+
+:textile
+  Ruby, out of the box, provides many useful methods for manipulating file and directories.  Ruby even makes it easy to copy directories recursively.  Most of these handy-dandy methods can be found on the "FileUtils":http://ruby-doc.org/core/classes/FileUtils.html class.  There is one, IMHO, recursive copy method that's missing from the core library.  It's a method that accepts a list of files to ignore/exclude.  If for some wacky reason you also have a need for this behavior, then you're in luck.
+
+  Below you'll find a tiny script that allows you to do just that.  You can initialize the object with an array of files or patterns to exclude, then invoke the solitary copy method.  That's all there is to it.  The script will recursively copy the *source* directory to the *destination* directory.  :)
+  
+%pre
+  %code.ruby<
+    :preserve
+      require 'FileUtils'
+
+      class DaCopier
+
+        def initialize(exclude)
+          @exclude = exclude
+        end
+
+        def copy src, dest
+
+          stage dest
+
+          Dir.foreach(src) do |file|
+
+            next if @exclude.include?(file)
+
+            s = File.join(src, file)
+            d = File.join(dest, file)
+
+            if File.directory?(s)
+              FileUtils.mkdir(d)
+              copy s, d
+            else
+              FileUtils.cp(s, d)
+            end
+
+            puts d
+
+          end
+
+        end
+
+        private
+
+        def stage dest
+          if File.directory?(dest)
+            FileUtils.rm_rf(dest)
+          end
+
+          FileUtils.mkdir(dest)
+        end
+
+      end
+
+      src = '/Users/Emilio/Dropbox'
+      dest = '/Users/Emilio/Dropbox 2'
+      exclude = %w{ . .. favicon.ico cheese.jpg }
+
+      dc = DaCopier.new(exclude)
+
+      dc.copy src, dest
+      
