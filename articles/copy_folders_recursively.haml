@@ -2,9 +2,11 @@
 -# published: 2009-7-28
 
 :textile
-  Ruby, out of the box, provides many useful methods for manipulating file and directories.  Ruby even makes it easy to copy directories recursively.  Most of these handy-dandy methods can be found on the "FileUtils":http://ruby-doc.org/core/classes/FileUtils.html class.  There is one, IMHO, recursive copy method that's missing from the core library.  It's a method that accepts a list of files to ignore/exclude.  If for some wacky reason you also have a need for this behavior, then you're in luck.
+  Ruby, out of the box, provides many useful classes for working with files and directories.  Most of these handy-dandy methods can be found on the "FileUtils":http://ruby-doc.org/core/classes/FileUtils.html class.  Ruby even makes it easy to copy directories recursively.  Since recursive directory copying is the topic of the day,  I thought I'd burn a few lines talking about just that.  The *FileUtils.cp_r* method is a fine way to copy directories recursively.  It works exactly as advertised.  
+  
+  The *FileUtils* class, IMHO, has a missing a method.  It's a method very similar in behavior to *cp_r*, that accepts a list of files to ignore/exclude recursively.  If for some wacky reason you also have a need for this behavior, then you're in luck.
 
-  Below you'll find a tiny script that allows you to do just that.  You can initialize the object with an array of files or patterns to exclude, then invoke the solitary copy method.  That's all there is to it.  The script will recursively copy the *source* directory to the *destination* directory.  :)
+  Below you'll find a tiny script that allows you to do just that.  You can initialize the object with an array of files or patterns to exclude, then invoke the solitary copy method.  That's all there is to it.  The script will recursively copy the *source* directory to the *destination* directory and compare each file against your exclude list.  
   
 %pre
   %code.ruby<
@@ -22,7 +24,6 @@
           stage dest
 
           Dir.foreach(src) do |file|
-
             next if @exclude.include?(file)
 
             s = File.join(src, file)
@@ -60,4 +61,6 @@
       dc = DaCopier.new(exclude)
 
       dc.copy src, dest
-      
+
+:textile
+  *DISCLAIMER:* This script is not battle tested and you'll probably want to run it through your own tests before using it in any production scenario.
