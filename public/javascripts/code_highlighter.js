@@ -229,9 +229,12 @@ CodeHighlighter.addStyle("ruby",{
   keywords : {
     exp  : /\b(do|end|self|class|def|if|module|yield|then|else|for|until|unless|while|elsif|case|when|break|retry|redo|rescue|require|raise|private|puts|next|new|return|true|false)\b/
   },
-	classes : {
-	    exp  : /\b(File|FileUtils|Dir)\b/
-	},
+  classes : {
+      exp  : /\b(File|FileUtils|Dir)\b/
+  },
+  instancevars : {
+    exp  : /@\w[\w\s]*/
+  },
   /* Added by Shelly Fisher (shelly@agileevolved.com) */
   symbol : {
     exp : /([^:])(:[A-Za-z0-9_!?]+)/
@@ -268,7 +271,7 @@ CodeHighlighter.addStyle("html", {
     exp  : /'[^']*'|"[^"]*"/
   },
   attribute : {
-    exp: /\b([a-zA-Z-:]+)(=)/, 
+    exp: /\b([a-zA-Z-:]+)(=)/,
     replacement: "<span class=\"$0\">$1</span>$2"
   },
   doctype : {
