@@ -24,7 +24,7 @@
           stage dest
 
           Dir.foreach(src) do |file|
-            next if @exclude.include?(file)
+            next if exclude?(file)
 
             s = File.join(src, file)
             d = File.join(dest, file)
@@ -39,7 +39,6 @@
             puts d
 
           end
-
         end
 
         private
@@ -52,15 +51,23 @@
           FileUtils.mkdir(dest)
         end
 
+        def exclude? file
+          @exclude.each do |s|
+            if file.match(/\#{s}/i)
+              return true
+            end
+          end
+          false
+        end
       end
 
       src = '/Users/Emilio/Dropbox'
       dest = '/Users/Emilio/Dropbox 2'
-      exclude = %w{ . .. favicon.ico cheese.jpg }
+      exclude = ["^\\.", "_old", "cheese.jpg"]
 
       dc = DaCopier.new(exclude)
 
       dc.copy src, dest
-
+      
 :textile
   *DISCLAIMER:* This script is not battle tested and you'll probably want to run it through your own tests before using it in any production scenario.
