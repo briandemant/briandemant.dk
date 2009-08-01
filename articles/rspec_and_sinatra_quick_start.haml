@@ -1,0 +1,141 @@
+-# title: Sinatra and RSpec Quick Start
+-# published: 2009-8-1
+
+:textile
+  Are you familiar with RSpec, new to Sinatra, and can't get the two to cooperate?  This article maybe of use to you.  Alternatively, if you're like me and you're simply new to this universe all together?  This article can certainly be of use. 
+
+  I recently started -playing with- learning Sinatra after months of procrastination.  I started with some exploratory (throw away) code.  My preliminary results were good and I was quickly hooked.  I needed a more substantial problem to solve.  I decided to take this site and redo it using Sinatra.  The first task I needed to tackle, was learning how to specify my Sinatra application.  I prefer RSpec, so naturally I focussed my effort on getting RSpec setup with Sinatra.  After running through this setup a few times, it seems like trivial knowledge to share. At the time, it took some real investigation to get it all going. If I can save (at least) one person a little time, then this article has served a purpose.  As a bonus, if you're using *autospec*, the following setup is compatible. 
+  
+  I'll assume you've used RSpec before and you're machine is configured correctly.  If this assumption is incorrect, you can get up to speed "here":http://wiki.github.com/dchelimsky/rspec. 
+  
+  As a prerequisite, we need to add a few things to your filesystem. Here's the list: 
+
+%ol  
+  %li 
+    Make a new 
+    %strong spec 
+    folder in the root of your application folder
+  %li 
+    Make a new 
+    %strong spec_helper.rb 
+    file inside your 
+    %strong spec 
+    folder
+  %li 
+    Make a new 
+    %strong spec.opts
+    file inside your 
+    %strong spec
+    folder
+  %li 
+    Make a new spec file inside your 
+    %strong spec 
+    folder for your application
+    %div 
+      %strong ex.
+      myapp_spec.rb
+
+:textile
+  If you're down with some terminal action, you can use these commands to accomplish all the steps above.
+  
+%pre
+  %code<
+    :preserve
+      $ cd your/app_dir/
+      $ mkdir spec
+      $ touch spec/spec_helper.rb
+      $ touch spec/spec.opts
+      $ touch spec/myapp_spec.rb
+
+%h3 Spec Helper
+
+:textile
+  Lets move on to the *spec_helper* setup, shall we?  The setup is pretty simple and for the most part, you can just paste in the following code and you'll be good.  There is one thing to note. Sinatra now relies on *Rack::Test* and has deprecated the use of *Sinatra::Test*.
+  
+%pre
+  %code.ruby<
+    :preserve
+      require File.join(File.dirname(__FILE__), '..', 'myapp.rb')
+
+      require 'rubygems'
+      require 'sinatra'
+      require 'rack/test'
+      require 'spec'
+      require 'spec/autorun'
+      require 'spec/interop/test'
+
+      # set test environment
+      set :environment, :test
+      set :run, false
+      set :raise_errors, true
+      set :logging, false
+      
+:textile
+  The *spec.opts* file is even simpler to setup.  These are the basic options I use.
+  
+%pre
+  %code.ruby<
+    :preserve
+      --colour
+      --format progress
+      --loadby mtime
+      --reverse
+      
+%h3 The Spec File
+
+:textile
+  Now that all the setup work is complete we can write some specs.  Requiring our *spec_helper.rb* file will grant our spec the magical powers it needs to be useful.  The last thing we'll need to do is include *Rack::Test::Methods*.  We get all the goodies of *Rack::Test* via a mixin and we don't need to inherit from a super class (I'm really happy they did it this way).  The basic template for your specs will look like this:
+
+%pre
+  %code.ruby<
+    :preserve  
+      require File.dirname(__FILE__) + '/spec_helper'
+      
+      describe "My App" do
+        include Rack::Test::Methods
+
+        def app
+          @app ||= Sinatra::Application
+        end
+
+        it "should respond to /" do
+          get '/'
+          last_response.should be_ok
+        end
+      end
+
+:textile
+  You can use *last_response* for most of your testing needs. You can test response headers like so: 
+
+%pre
+  %code.ruby<
+    :preserve
+      it "should return the correct content-type when viewing root" do
+        get '/'
+        last_response.headers["Content-Type"].should == "text/html"
+      end
+
+:textile
+  Testing status: 
+
+%pre
+  %code.ruby<
+    :preserve
+      it "should return 404 when page cannot be found" do
+        get '/404'
+        last_response.status.should == 404
+      end
+
+:textile
+  Testing the output: 
+
+%pre
+  %code.ruby<
+    :preserve
+      it "should return blah blah blah when viewing root" do
+        get '/'
+        last_response.body == "blah blah blah"
+      end
+
+:textile          
+  That wasn't that bad, was it?  It would be tragedy if the beautiful simplicity of Sinatra was paired with a complicated testing experience.  That said, I think RSpec and Sinatra make great crime partners.  If you've made it this far, let me reward you with a few more things you should probably read: "Rack::Test Documentation":http://gitrdoc.com/brynary/rack-test/tree/master, "Testing Sinatra with Rack::Test":http://www.sinatrarb.com/testing.html.  You can also explore the "source":http://github.com/ecavazos/iamneato.com/tree/e3d0687dade4443f2d055f962ccfcf8ccbfb656d/spec for this site's specification. 

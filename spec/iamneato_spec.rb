@@ -1,7 +1,5 @@
 require File.dirname(__FILE__) + '/spec_helper'
 
-set :environment, :test
-
 describe "I Am Neato" do
   include Rack::Test::Methods
   
