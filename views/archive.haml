@@ -1,11 +1,15 @@
 %h2 Archive
-%p= "I know it's not much of an archive. I only have #{@articles.length} articles in my archive.  Sorry, I'm a lazy blogger."
+%p= "I know it's not much of an archive. I only have #{@total} articles in my archive.  Sorry, I'm a lazy blogger."
+
 #archive
-  - for @article in @articles
-    %ul
-      %li
-        .published
-          = @article.published.strftime("%b %d %Y")
-        %h3.title
-          %a{:href => article_path(@article)}
-            = @article.title
+  - for archive in @archives
+    %div
+      %h3= archive.month_year
+      %ul
+        - for article in archive.articles
+          %li
+            %span.title
+              %a{:href => article_path(article)}
+                = article.title
+            \-
+            = date(article)

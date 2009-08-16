@@ -1,4 +1,5 @@
-require 'lib/article.rb'
+require 'lib/article'
+require 'lib/archive'
 
 class ArticleGetter
   
@@ -33,5 +34,23 @@ class ArticleGetter
 
   def parse_date(date_string)
     date_string && Time.local(*date_string.split('-').map {|s| s.to_i})
+  end
+  
+  def archives
+    idx = 0
+    archives = []
+    
+    all.sort.each do |a|
+      my = a.published.strftime("%B %Y")
+      
+      if archives.length == 0 || archives[idx].month_year != my
+        idx = idx.succ unless archives.length == 0
+        archives[idx] = Archive.new my, a
+        next
+      end
+
+      archives[idx].articles << a
+    end
+    archives
   end
 end

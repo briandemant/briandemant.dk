@@ -28,7 +28,12 @@ describe "I Am Neato" do
   end
   
   it "should respond to /doodles" do
-    get '/about'
+    get '/doodles'
+    last_response.should be_ok
+  end
+  
+  it "should respond to /archive" do
+    get '/archive'
     last_response.should be_ok
   end
 

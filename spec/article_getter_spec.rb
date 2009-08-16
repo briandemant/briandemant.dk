@@ -1,5 +1,6 @@
 require File.dirname(__FILE__) + '/spec_helper'
 require File.dirname(__FILE__) + '/../lib/article_getter'
+require File.dirname(__FILE__) + '/../lib/archive'
 
 describe "ArticleGetter" do
   
@@ -7,7 +8,7 @@ describe "ArticleGetter" do
     @getter = ArticleGetter.new('articles')
   end
   
-  it "should retrun all article file names" do
+  it "should return all article file names" do
     f = @getter.files[0]
     File.extname(f).should == '.haml'
   end
@@ -31,6 +32,13 @@ describe "ArticleGetter" do
   
   it "should return a date" do
     @getter.parse_date('2009-11-12').instance_of?(Time).should be_true
+  end
+
+  it "should return archives" do
+    arc = @getter.archives
+    
+    arc.length.should be > 0
+    arc[0].articles.length.should be > 0
   end
 
 end

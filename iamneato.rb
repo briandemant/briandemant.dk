@@ -1,6 +1,7 @@
 require 'rubygems'
 require 'sinatra'
 require 'haml'
+require 'sass'
 require 'time'
 require 'lib/article_getter'
 
@@ -19,6 +20,10 @@ helpers do
     "/#{article.published.strftime("%Y/%m/%d")}/#{article.id}"
   end
   
+  def date(article)
+    article.published.strftime("%Y/%m/%d")
+  end
+  
   def absoluteify_links(html)
     host = 'http://www.iamneato.com'
     path = "\\1#{host}\\2\\3"
@@ -27,6 +32,7 @@ helpers do
       gsub(/href=(["'])(\/.*?)(["'])/, "href=#{path}").
       gsub(/src=(["'])(\/.*?)(["'])/, "src=#{path}")
   end
+  
 end
 
 get '/' do
@@ -46,7 +52,8 @@ get '/doodles' do
 end
 
 get '/archive' do
-  @articles = @getter.all.sort
+  @archives = @getter.archives
+  @total = @getter.all.length
   @title = 'Archive'
   haml :archive
 end
