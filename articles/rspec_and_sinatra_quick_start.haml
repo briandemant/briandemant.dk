@@ -1,4 +1,4 @@
--# title: Sinatra and RSpec Quick Start
+-# title: RSpec and Sinatra Quick Start
 -# published: 2009-8-1
 
 :textile
@@ -52,6 +52,10 @@
 :textile
   Lets move on to the *spec_helper* setup, shall we?  The setup is pretty simple and for the most part, you can just paste in the following code and you'll be good.  There is one thing to note. Sinatra now relies on *Rack::Test* and has deprecated the use of *Sinatra::Test*.
   
+.update
+  :textile
+    *Update:* Vinicius has pointed out a few oversights in this article.  The first is *myapp.rb* found on line one of the *spec_helper*.  If the file that contains your application isn't named *myapp.rb* (and it probably isn't), you should update *myapp.rb* to match the name of your application file.  Before continuing, you also need the *rack-test* gem installed.  A simple *sudo gem install rack-test* will do the trick.
+    
 %pre
   %code.ruby<
     :preserve

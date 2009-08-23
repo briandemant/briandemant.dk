@@ -5,9 +5,9 @@ require 'sass'
 require 'time'
 require 'lib/article_getter'
 
+# shotgun -s thin -p 4567 iamneato.rb
+
 before do
-  @int ||= 0
-  @int += 1
   @getter = ArticleGetter.new(File.join(Sinatra::Application.root, 'articles'))
 end
 
