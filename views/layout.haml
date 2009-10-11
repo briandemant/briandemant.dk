@@ -12,14 +12,11 @@
     %script{:src => '/javascripts/code_highlighter.js', :type => "text/javascript"}
 
   %body
-    #menu-wrapper= haml :_menu, :layout => false
     #header
       #header-wrapper
         #header-img
           I am neato, you are neato, we are neato, ummmm ...
-        #subscribe
-          %a{ :href => '/articles.atom' }
-            %img{ :src => '/images/feed-icon.png', :alt => 'Subscribe', :title => 'Subscribe' }
+        #menu-wrapper= haml :_menu, :layout => false
     #main
       = yield
     #footer= haml :_footer, :layout => false
