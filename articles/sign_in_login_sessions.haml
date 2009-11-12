@@ -1,0 +1,21 @@
+-# title: Sign in, Login, Sessions
+-# published: 2009-11-12
+
+:textile
+  I started a new Rails project recently and with any new project you want to get the boring parts out of the way as fast as possible.  Getting a new project started fast is one of the advantages in using Rails but it's inevitable that you'll face some problems or decisions that require a pilot.  And depending on how often you start new projects or how long it's been since you started one, you've probably forgotten a thing or two.  I know I did, but Google and I have faced tougher challenges.  I attempted to get the sign in/sign up features done early since most of my stories require a user.  I couldn't pick between login or sign in so I hit the wild-web to do some research.  My research (quick and unscientific) revealed an alarming amount of inconsistency.  So I decided to go with "sign in" and move on with life.
+  
+  While working on the sign in page I stumbled over another problem.  If authentication failed, then my nice */signup* route was replaced with the ugly */user_session* route.  So I hit the web again in search of a definitive answer.  What I found this time was even more alarming than what I found the first time.  There are numerous popular sites that have the same problem.  Some sites had *sign up* links pointing to */login* routes and other were incomprehensible. I was disappointed and was not okay with the status quo.  It's the kind of sh*t I would lose sleep over.
+    
+  If you don't believe me just have a look at "twitter's":http://www.twitter.com/login sign in page.  "Twitter's":http://twitter.com/login link reads "login" and as you would expect, it takes you to the */login* route. The header and button on the page read "Sign in" and "Sign In" respectively.  If you fail to correctly enter your username or password you are redirected to the */sessions* route. Whaaaa?  I'm not trying to pick on twitter; they weren't the only offenders.  Take a look at "github":https://github.com/login or "justin.tv":http://www.justin.tv/login or "peepcode's":https://peepcode.com/login website.  That's just a small sampling.
+
+  I was able to solve this issue with a simple change to the *routes.rb* file and a small tweak to my sign in form. I updated my sign in form to post to the *signin_path* and added the following lines to *routes.rb:*
+
+%pre
+  %code.ruby<
+    :preserve
+      map.signin 'signin', :controller => 'user_sessions', 
+      :action => 'new', :conditions => { :method => :get }
+
+      map.signin 'signin', :controller => 'user_sessions', 
+      :action => 'create', :conditions => { :method => :post }
+
