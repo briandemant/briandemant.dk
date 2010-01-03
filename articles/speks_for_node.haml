@@ -1,0 +1,82 @@
+-# title: Speks for Node.js
+-# published: 2010-3-1
+
+:textile
+  It's been a long time since I've been excited to write about a topic.  It's
+  been even longer since I've been excited about JavaScript.  In fact, I've 
+  spent most of my career despising JavaScript.  It's a real shame because
+  JavaScript is a beautiful and expressive dynamic programming language.  And
+  it's taking a lot of rehabilitation in order for me to say that.
+  JavaScript owes its popularity and bad reputation to the Internet.
+  Specifically, the bad reputation is directly related to poor browser
+  implementations and the script-kiddies (myself included) who amassed large piles of
+  unmaintainable code.  But this is changing and JavaScript has a great
+  community to thank for that.  
+  
+  "Node.js":http://nodejs.org/ is a good example of how things are changing for 
+  JavaScript. I spent the past month learning and using 
+  "node":http://nodejs.org/ and it's been a lot of fun.  I strongly urge you 
+  to read "about node":http://nodejs.org/#about if you're not already familiar 
+  with it ... _cue the Jeopardy music_.
+  
+  So, um yeah, Node is awesome. It's given me an opportunity to sharpen my 
+  JavaScript skills and learn more about writing concurrent applications.  Plus
+  it's all server-side; so there's no DOM and no cross-browser BS to worry 
+  about. What's not to like?
+  
+  My first Node project of any significance is a testing framework.  It's a 
+  simple RSpec derivative for node-code cleverly titled 
+  "Speks":http://github.com/ecavazos/speks (I know, brilliant right?).  Speks is
+  only a spec runner and a DSL for specifying your code but I have plenty of 
+  ideas for future enhancements.  The anatomy of a spec is basic.  It consists
+  of a *describe* block, at least one nested *it* block and optional 
+  *beforeEach*, *afterEach* blocks.  Like so:
+
+%pre
+  %code.javascript<
+    :preserve
+      describe("Sephiroth", function () {
+
+        var s = require('../spec/examples/sephiroth');
+
+        beforeEach(function () {
+          sephiroth = new s.Sephiroth();
+        });
+
+        it("should be named 'Sephiroth'", function () {
+          sephiroth.getName().shouldEqual('Sephiroth');
+        });
+        
+      });
+
+:textile
+  I've augmented some of the built-in JavaScript types to improve the
+  readability of the specification code.  The prototyping only occurs during
+  the execution of a spec-run.  There's currently a dozen or so of these 
+  *should* prototype methods and I'll be adding more soon.  I've listed the 
+  available methods below.
+
+%pre
+  %code.javascript<
+    :preserve
+      // Object
+      obj1.shouldEqual(obj2);
+      obj1.shouldNotEqual(obj2);
+      obj1.shouldBeSame(obj1);
+      obj1.shouldNotBeSame(obj2);
+
+      // Boolean
+      true.shouldBeTrue();
+      false.shouldBeFalse();
+
+      // String
+      "foo".shouldMatch(/foo/);
+      "foo".shouldNotMatch(/bar/);
+
+      // Number
+      (1).shouldBeGreaterThan(0);
+      (2).shouldBeLessThan(1);
+
+:textile
+  Download the "source":http://github.com/ecavazos/speks and try it for
+  yourself; I could use the feedback.
